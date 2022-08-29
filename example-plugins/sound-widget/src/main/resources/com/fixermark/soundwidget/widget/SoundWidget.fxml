@@ -5,13 +5,11 @@
 <?import javafx.scene.layout.VBox?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.simplewidget.widget.SimplePointWidget"
+      fx:controller="com.fixermark.soundwidget.widget.SoundWidget"
       fx:id="root"
       spacing="4">
     <padding>
         <!-- Keep a 4 pixel buffer around the widget to avoid it from feeling cramped -->
         <Insets topRightBottomLeft="4"/>
     </padding>
-    <Label fx:id="xCoordinateView"/>
-    <Label fx:id="yCoordinateView"/>
 </VBox>
