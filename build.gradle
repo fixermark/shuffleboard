@@ -159,6 +159,7 @@ allprojects {
         javaFxDeps wpilibTools.deps.javafx("controls")
         javaFxDeps wpilibTools.deps.javafx("fxml")
         javaFxDeps wpilibTools.deps.javafx("graphics")
+        javaFxDeps wpilibTools.deps.javafx("media")
 
         def junitJupiter = { name ->
             create group: 'org.junit.jupiter', name: name, version: '5.6.1'
