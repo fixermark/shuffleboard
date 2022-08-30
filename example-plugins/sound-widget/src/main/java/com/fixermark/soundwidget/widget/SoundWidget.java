@@ -12,7 +12,9 @@ import edu.wpi.first.shuffleboard.api.widget.ParametrizedController;
 import edu.wpi.first.shuffleboard.api.widget.SimpleAnnotatedWidget;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.Property;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -37,7 +39,7 @@ public final class SoundWidget extends SimpleAnnotatedWidget<Boolean> {
   private Text errorMessage;
 
   /** Path to the sound file to play */
-  private final Property<String> soundPath = new SimpleStringProperty(this, "soundPath", "");
+  private final Property<String> soundPath = new SimpleObjectProperty<>(this, "soundPath", "");
 
   /**
    * Media player to play the loaded sound, or null if the sound was not
