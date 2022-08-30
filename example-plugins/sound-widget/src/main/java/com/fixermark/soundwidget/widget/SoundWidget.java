@@ -31,11 +31,12 @@ public final class SoundWidget extends SimpleAnnotatedWidget<Boolean> {
 
   /**
    * The root content to display. We do a simple light grey / dark grey box to
-   * indicate true / false status
+   * indicate true / false status and white if there's no data.
    */
   @FXML
   private Pane root;
 
+  /** Holder for an error panel; this gets attached to root if we need to display error text */
   private Text errorMessage;
 
   /** Path to the sound file to play */
@@ -47,6 +48,9 @@ public final class SoundWidget extends SimpleAnnotatedWidget<Boolean> {
    */
   private MediaPlayer player;
 
+  /**
+   * Called by the JavaFX framework to initialize the widget
+   */
   @FXML
   private void initialize() {
     root.backgroundProperty().bind(
@@ -58,6 +62,10 @@ public final class SoundWidget extends SimpleAnnotatedWidget<Boolean> {
     loadSoundFile();
   }
 
+  /**
+   * Report the settings for this widget
+   * @return List of the widget's setting groups
+   */
   @Override
   public List<Group> getSettings() {
     return ImmutableList.of(
@@ -65,6 +73,9 @@ public final class SoundWidget extends SimpleAnnotatedWidget<Boolean> {
             Setting.of("Source file", "Path to audio file to use", soundPath, String.class)));
   }
 
+  /**
+   * Attempt to load the sound file and build a MediaPlayer, or set error message if we cannot load
+   */
   private void loadSoundFile() {
     player = null;
     try {
@@ -86,6 +97,10 @@ public final class SoundWidget extends SimpleAnnotatedWidget<Boolean> {
     }
   }
 
+  /**
+   * Set error message, or clear error message by passing a null string
+   * @param msg Message to set, or null to clear currently-set message
+   */
   private void setErrorMessage(String msg) {
     if (msg == null) {
       if (errorMessage != null) {
@@ -103,10 +118,20 @@ public final class SoundWidget extends SimpleAnnotatedWidget<Boolean> {
     }
   }
 
+  /**
+   * Build a sold-color background to attach as a property
+   * @param color Color to use
+   * @return The built background
+   */
   private Background createSolidColorBackground(Color color) {
     return new Background(new BackgroundFill(color, null, null));
   }
 
+  /**
+   * Choose the color to use based on current widget state
+   * 
+   * @return Color to use
+   */
   private Color getColor() {
     final Boolean data = getData();
     if (data == null) {
@@ -120,6 +145,11 @@ public final class SoundWidget extends SimpleAnnotatedWidget<Boolean> {
     }
   }
 
+  /**
+   * Check to see if we should play the sound and recycle the sound if we should.
+   * 
+   * We play if the boolean value is true and the player is available.
+   */
   private void checkSoundPlay() {
     final Boolean data = getData();
 
@@ -129,14 +159,28 @@ public final class SoundWidget extends SimpleAnnotatedWidget<Boolean> {
     }
   }
 
+  /**
+   * Accessor for sound path
+   * 
+   * @return Sound path
+   */
   public String getSoundPath() {
     return soundPath.getValue();
   }
 
+  /**
+   * Accessor to set the sound path
+   * @param path New value for path
+   */
   public void setSoundPath(String path) {
     soundPath.setValue(path);
   }
 
+  /**
+   * Accessor to the entire sound path property
+   * 
+   * @return The sound path property
+   */
   public StringProperty soundPathProperty() {
     return this.soundPath;
   }
