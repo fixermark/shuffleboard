@@ -39,7 +39,7 @@ public final class SoundWidget extends SimpleAnnotatedWidget<Boolean> {
   private Text errorMessage;
 
   /** Path to the sound file to play */
-  private final Property<String> soundPath = new SimpleObjectProperty<>(this, "soundPath", "");
+  private final StringProperty soundPath = new SimpleStringProperty(this, "soundPath", "");
 
   /**
    * Media player to play the loaded sound, or null if the sound was not
@@ -62,7 +62,7 @@ public final class SoundWidget extends SimpleAnnotatedWidget<Boolean> {
   public List<Group> getSettings() {
     return ImmutableList.of(
         Group.of("Sound",
-            Setting.of("Source file", "Path to audio file to use", soundPath)));
+            Setting.of("Source file", "Path to audio file to use", soundPath, String.class)));
   }
 
   private void loadSoundFile() {
@@ -137,7 +137,7 @@ public final class SoundWidget extends SimpleAnnotatedWidget<Boolean> {
     soundPath.setValue(path);
   }
 
-  public Property<String> soundPathProperty() {
+  public StringProperty soundPathProperty() {
     return this.soundPath;
   }
 
